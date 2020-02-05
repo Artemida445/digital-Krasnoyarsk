@@ -52,39 +52,32 @@ $message = $_POST['message'];
 
         //$recipient = "aa_tikhonov@mail.ru";
         $mail->setFrom("digitalkrsk@mail.ru");
-        $mail->addAddress("tikhonov.art@mail.ru");
+        $mail->addAddress("aa_tikhonov@mail.ru");
         $mail->isHTML(true);
 
 
-       $email_content = "Имя: $name\n";
-       $email_content .= "<br>Email:\n$email\n";
-       $email_content .= "<br>Сообщение:\n$message\n";
+        $email_content = "Имя: $name\n";
+        $email_content .= "<br>Email:\n$email\n";
+        $email_content .= "<br>Сообщение:\n$message\n";
 
         $mail->Subject = 'Новое сообщение с сайта';
         $mail->Body = ''.$subject . "\n".$email_content;
         $mail->AltBody = '';
 
-        //$subject = "Новое сообщение от $name";
-
-/*
-            $email_headers= "From: $name <$email>";
-
- 
-        if (mail($recipient, $subject, $email_content,  $email_headers)) {
-             
-            http_response_code(200);
-         
-            echo "Спасибо Ваше сообщение было отправлено";  
-         
-        } 
-        else {
-
-            http_response_code(500);
-           echo "error";
-          
-        }
-    }*/
-
-    
-
+if($mail->send()) {
+      http_response_code(200);
+      echo 'Спасибо, ваше сообщение было отправлено.';
+      exit;
+} else {
+      http_response_code(500);
+      echo 'Извините, произошла ошибка. Попробуй позже.';
+      exit;
+}
 ?>
+
+
+
+
+
+
+
